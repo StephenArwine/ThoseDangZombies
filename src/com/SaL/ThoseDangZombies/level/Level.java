@@ -10,6 +10,7 @@ import com.SaL.ThoseDangZombies.level.tile.indoortiles.IndoorTiles;
 import com.SaL.ThoseDangZombies.screen.GameScreen;
 
 public class Level {
+
 	public static int[] tiles;
 	public static Tile[][] world;
 	public static boolean[][] Solid;
@@ -23,6 +24,7 @@ public class Level {
 	private GameScreen screen;
 
 	public Level(String path, GameScreen screen) {
+
 		this.screen = screen;
 
 		loadLevel(path);
@@ -58,6 +60,7 @@ public class Level {
 	}
 
 	public void overrender(Graphics g, Camera camera) {
+
 		int x0 = camera.x >> 4;
 		int x1 = (camera.x + camera.width + 16) >> 4;
 		int y0 = camera.y >> 4;
@@ -76,6 +79,7 @@ public class Level {
 
 	@SuppressWarnings("unchecked")
 	private void getTiles() {
+
 		entityMap = new ArrayList[width][height];
 		Solid = new boolean[width][height];
 		OverTiles = new boolean[width][height];
@@ -86,70 +90,54 @@ public class Level {
 
 				entityMap[x][y] = new ArrayList<Entity>();
 
-				if (tiles[x + y * width] == 0xFFFFFFFF)
-					IndoorTiles.WoodFloor.Register(x, y);
-				if (tiles[x + y * width] == 0xFF808077)
-					IndoorTiles.WallNorth.Register(x, y);
-				if (tiles[x + y * width] == 0xFF808079)
-					IndoorTiles.WallWest.Register(x, y);
-				if (tiles[x + y * width] == 0xFF808080)
-					IndoorTiles.WallEast.Register(x, y);
-				if (tiles[x + y * width] == 0xFF808069)
-					IndoorTiles.WallSouthWest.Register(x, y);
-				if (tiles[x + y * width] == 0xFF808068)
-					IndoorTiles.WallSouthEast.Register(x, y);
-				if (tiles[x + y * width] == 0xFF0094FF)
-					IndoorTiles.ArmorRack.Register(x, y);
-				if (tiles[x + y * width] == 0xFFFFD800)
-					IndoorTiles.TorchN.Register(x, y);
-				if (tiles[x + y * width] == 0xFFFF0000)
-					IndoorTiles.Bed.Register(x, y);
-				if (tiles[x + y * width] == 0xFF73410F)
-					IndoorTiles.ChairSouth.Register(x, y);
-				if (tiles[x + y * width] == 0xFF73412F)
-					IndoorTiles.Table.Register(x, y);
-				if (tiles[x + y * width] == 0xFF73411F)
-					IndoorTiles.ChairWest.Register(x, y);
+				if (tiles[x + y * width] == 0xFFFFFFFF) IndoorTiles.WoodFloor.Register(x, y);
+				if (tiles[x + y * width] == 0xFF808077) IndoorTiles.WallNorth.Register(x, y);
+				if (tiles[x + y * width] == 0xFF808079) IndoorTiles.WallWest.Register(x, y);
+				if (tiles[x + y * width] == 0xFF808080) IndoorTiles.WallEast.Register(x, y);
+				if (tiles[x + y * width] == 0xFF808069) IndoorTiles.WallSouthWest.Register(x, y);
+				if (tiles[x + y * width] == 0xFF808068) IndoorTiles.WallSouthEast.Register(x, y);
+				if (tiles[x + y * width] == 0xFF0094FF) IndoorTiles.ArmorRack.Register(x, y);
+				if (tiles[x + y * width] == 0xFFFFD800) IndoorTiles.TorchN.Register(x, y);
+				if (tiles[x + y * width] == 0xFFFF0000) IndoorTiles.Bed.Register(x, y);
+				if (tiles[x + y * width] == 0xFF73410F) IndoorTiles.ChairSouth.Register(x, y);
+				if (tiles[x + y * width] == 0xFF73412F) IndoorTiles.Table.Register(x, y);
+				if (tiles[x + y * width] == 0xFF73411F) IndoorTiles.ChairWest.Register(x, y);
 				if (tiles[x + y * width] == 0xFF303030) {
 					IndoorTiles.WoodFloor.Register(x, y);
-					add(new Events(x * 16, y * 16, 2));
+					//				add(new Events(x, y, 2));
 				}
 				if (tiles[x + y * width] == 0xFF0000FF) {
 					IndoorTiles.WoodFloor.Register(x, y);
 					add(new TestNPC(x, y));
 				}
 
-				if (tiles[x + y * width] == 0xFF808072)
-					IndoorTiles.Axe.Register(x, y);
+				if (tiles[x + y * width] == 0xFF808072) IndoorTiles.Axe.Register(x, y);
 			}
 		}
 
 	}
 
 	public void update() {
+
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			int xSlotOld = e.xSpot;
-			int ySlotOld = e.xSpot;
-			if (!e.removed)
-				e.update();
-			e.xSpot = (int) ((e.x + e.w / 2.0) / 16);
-			e.ySpot = (int) ((e.y + e.h / 2.0) / 16);
+			int ySlotOld = e.ySpot;
+			if (!e.removed) e.update();
+			e.xSpot = (e.x / 16);
+			e.ySpot = (e.y / 16);
 			if (e.removed) {
-				if (xSlotOld >= 0 && ySlotOld >= 0 && xSlotOld < width
-						&& ySlotOld < height) {
+				if (xSlotOld >= 0 && ySlotOld >= 0 && xSlotOld < width && ySlotOld < height) {
 					entityMap[xSlotOld][ySlotOld].remove(e);
 				}
 				entities.remove(i--);
 			} else {
 
 				if (e.xSpot != xSlotOld || e.ySpot != ySlotOld) {
-					if (xSlotOld >= 0 && ySlotOld >= 0 && xSlotOld < width
-							&& ySlotOld < height) {
+					if (xSlotOld >= 0 && ySlotOld >= 0 && xSlotOld < width && ySlotOld < height) {
 						entityMap[xSlotOld][ySlotOld].remove(e);
 					}
-					if (e.xSpot >= 0 && e.ySpot >= 0 && e.xSpot < width
-							&& e.ySpot < height) {
+					if (e.xSpot >= 0 && e.ySpot >= 0 && e.xSpot < width && e.ySpot < height) {
 						entityMap[e.xSpot][e.ySpot].add(e);
 					} else {
 						e.outOfBounds();
@@ -165,31 +153,39 @@ public class Level {
 		entities.add(e);
 		e.init(this);
 
-		e.xSpot = (int) ((e.x + e.w / 2.0) / 16);
-		e.ySpot = (int) ((e.y + e.h / 2.0) / 16);
+		e.xSpot = (e.x / 16);
+		e.ySpot = (e.y / 16);
 		if (e.xSpot >= 0 && e.ySpot >= 0 && e.xSpot < width && e.ySpot < height) {
 			entityMap[e.xSpot][e.ySpot].add(e);
 		}
 	}
 
-	public void CollisionCheck(int x, int y, int xa, int ya, int h, int w,
-			Entity ee) {
-		double tiny = 0.5;
+	public void CollisionCheck(int x, int y, int xa, int ya, int h, int w, Entity ee) {
+
 		int centerX = x >> 4;
 		int centerY = y >> 4;
-		int centerXa = (int) ((x + (w * xa)) - tiny) >> 4;
-		int centerYa = (int) ((y + (h * ya)) - tiny) >> 4;
+		int centerXa = (int) ((x + (w * xa))) >> 4;
+		int centerYa = (int) ((y + (h * ya))) >> 4;
 
-		// x check
-		if (!Solid[centerXa][centerY]) {
-			ee.x += xa;
-		}else{
-			System.out.println("fail");
-		}
-		if (!Solid[centerX][centerYa]) {
-			ee.y += ya;
-		}
+		move: {
+			java.util.List<Entity> entities = getEntities(ee);
+			for (int i = 0; i < entities.size(); i++) {
+				System.out.println("hit");
 
+				if (entities.get(i).xSpot == centerXa && entities.get(i).ySpot == centerYa) {
+					System.out.println("hit");
+					break move;
+				}
+			}
+			if (!Solid[centerXa][centerY]){
+				ee.x += xa;
+			}
+
+			if (!Solid[centerX][centerYa]){
+				ee.y += ya;
+			}
+		
+		}
 	}
 
 	public void popup(Events events) {
@@ -202,12 +198,20 @@ public class Level {
 	public List<Entity> getEntities(Entity ee) {
 
 		hits.clear();
-		for (int i = 0; i < entities.size(); i++) {
-			Entity e = entities.get(i);
-			if (e.xSpot == ee.xSpot && e.ySpot == ee.ySpot) {
-				hits.add(e);
+		int x0 = ee.xSpot - 1;
+		int y0 = ee.ySpot - 1;
+		int x1 = ee.xSpot + 1;
+		int y1 = ee.ySpot + 1;
+		for (int x = x0; x <= x1; x++)
+			for (int y = y0; y <= y1; y++) {
+				if (x >= 0 && y >= 0 && x < width && y < height) {
+					List<Entity> es = entityMap[x][y];
+					for (int i = 0; i < es.size(); i++) {
+						Entity e = es.get(i);
+						if (e != ee) hits.add(e);
+					}
+				}
 			}
-		}
 		return hits;
 	}
 }

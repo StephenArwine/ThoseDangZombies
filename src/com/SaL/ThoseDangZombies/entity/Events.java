@@ -10,10 +10,10 @@ public class Events extends Entity {
     public boolean auto = false;
 
     public Events(int x, int y, int id) {
-        this.x = x;
-        this.y = y;
-        this.w = 16;
-        this.h = 16;
+        this.x = x*16;
+        this.y = y*16;
+        this.w = 10;
+        this.h = 10;
         xa = ya = 0;
         this.id = id;
         auto = id == 1;

@@ -16,8 +16,8 @@ public class SpawnRoom extends Level{
 		}
 
 		protected void loadLevel(String path) {
-			Level.xSpawn = 2;
-			Level.ySpawn = 5;
+			Level.xSpawn = 6;
+			Level.ySpawn = 4;
 //			Level.levelType = IndoorTiles.woodfloor;
 
 			try {

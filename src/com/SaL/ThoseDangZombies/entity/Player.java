@@ -12,19 +12,21 @@ public class Player extends Entity {
 	private static int ySlot = 1;
 	private static int xSlot = 1;
 	public boolean readSign = false;
+	private int anim = 0;
 
 	@SuppressWarnings("static-access")
 	public Player(Level level) {
 		x = level.xSpawn << 4;
 		y = level.ySpawn << 4;
 		w = 8;
-		h = 7;
+		h = 8;
+		solid = true;
 	}
 
 	public void input(Input input) {
 		xa = 0;
 		ya = 0;
-		if (anim < 30)
+		if (anim < 60)
 			anim++;
 		else
 			anim = 0;
@@ -41,8 +43,9 @@ public class Player extends Entity {
 			xa++;
 		}
 		if (xa != 0 || ya != 0) {
+		walking = true;
 			move(xa, ya);
-			walking = true;
+
 		} else {
 			walking = false;
 			// falling = false;
@@ -62,15 +65,14 @@ public class Player extends Entity {
 			if (dir == 3)
 				ySlot = 3;
 			xSlot = 0;
-			if (anim > 10) {
+			if (anim > 20) {
 				xSlot = 1;
 			}
-			if (anim > 20) {
+			if (anim > 40) {
 				xSlot = 2;
 			}
-
 		}
-		GameScreen.renderplayer(xSlot, ySlot, x - 8, y - 12, g);
+		GameScreen.renderplayer(xSlot, ySlot, x - 8, y - 10, g);
 
 	}
 
