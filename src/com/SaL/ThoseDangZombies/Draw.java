@@ -13,8 +13,10 @@ public class Draw {
     public static BufferedImage[][] tiles = split(load("/textures/tiles.png"), 16, 16);
     public static BufferedImage[][] tilesflip = mirrorsplit(load("/textures/tiles.png"), 16, 16);
     public static BufferedImage[][] player = split(load("/textures/player.png"), 16, 18);
+    public static BufferedImage[][] zombie = split(load("/textures/zombie.png"), 16, 18);
     public static BufferedImage[][] playerAttacking = split(load("/textures/attackstance.png"), 16, 18);
-	public static BufferedImage[][] redstring = split(load("/redstring.png"), 6, 6);
+    public static BufferedImage[][] zombieAttacking = split(load("/textures/zombieattack.png"), 16, 18);
+    public static BufferedImage[][] redstring = split(load("/redstring.png"), 6, 6);
 	public static BufferedImage[][] greenstring = split(load("/greenstring.png"), 6, 6);
 
     

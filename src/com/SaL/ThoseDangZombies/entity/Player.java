@@ -4,20 +4,25 @@ import java.awt.Graphics;
 
 import com.SaL.ThoseDangZombies.Input;
 import com.SaL.ThoseDangZombies.level.Camera;
+import com.SaL.ThoseDangZombies.screen.TitleScreen;
 
 public class Player extends Entity {
 	private static int ySlot = 1;
 	private static int xSlot = 1;
 	public boolean readSign = false;
 	private int anim = 0;
-	private boolean checkattack = false;
+	private int anim2 = 0;
+	private boolean reset = false;
+	private int delay = 10;
 
-	public Player(int xSpawn ,int ySpawn) {
+	public Player(int xSpawn, int ySpawn) {
 		w = 6;
 		h = 5;
 		x = (xSpawn << 4) + 8;
 		y = (ySpawn << 4) + 13;
 		hitpower = -2;
+		attackable = true;
+		hp = 2;
 
 	}
 
@@ -59,7 +64,7 @@ public class Player extends Entity {
 			walking = false;
 			// falling = false;
 		}
-		//System.out.println("x:"+x+" y:"+y);
+		// System.out.println("x:"+x+" y:"+y);
 	}
 
 	public void render(Graphics g, Camera camera) {
@@ -87,9 +92,9 @@ public class Player extends Entity {
 			level.screen.renderplayer(xSlot, ySlot, x - 7, y - 13, g, 1);
 		} else if (attacking) {
 			if (ySlot == 0) {
-				level.screen.renderplayer(3, ySlot, x - 8, y - 22 - xSlot * 2,
+				level.screen.renderplayer(3, ySlot, x - 7, y - 22 - xSlot * 2,
 						g, 2);
-				level.screen.renderplayer(xSlot, ySlot, x - 8, y - 13 - xSlot,
+				level.screen.renderplayer(xSlot, ySlot, x - 7, y - 13 - xSlot,
 						g, 2);
 
 			}
@@ -103,9 +108,9 @@ public class Player extends Entity {
 			}
 			if (ySlot == 2) {
 
-				level.screen.renderplayer(xSlot, ySlot, x - 7, y - 7 + xSlot,
+				level.screen.renderplayer(xSlot, ySlot, x - 7, y - 12 + xSlot,
 						g, 2);
-				level.screen.renderplayer(3, ySlot, x - 7, y + 7 + xSlot * 2,
+				level.screen.renderplayer(3, ySlot, x - 7, y + 3 + xSlot * 2,
 						g, 2);
 
 			}
@@ -124,16 +129,19 @@ public class Player extends Entity {
 				attacking = false;
 
 		} else {
-			level.screen.renderplayer(0, ySlot, x - 7, y - 13, g, 1);
+			level.screen.renderplayer(1, ySlot, x - 7, y - 13, g, 1);
 
+		}
+		if (hit) {
+			level.screen.damagedisplay(OverHead, x - w, y - h - 9, g, negative);
 		}
 
 	}
 
 	public void event(Entity e) {
-			e.removed = true;
-			level.popup(e);
-		}
+		e.removed = true;
+		level.popup(e);
+	}
 
 	public void tryaction() {
 		java.util.List<Entity> entities = level.getEntities(this);
@@ -181,6 +189,40 @@ public class Player extends Entity {
 		if (checkattack) {
 			checkattack = false;
 			checkattack(this);
+		}
+		if (hit) {
+			if (anim2 < 40)
+				anim2++;
+			else {
+				anim2 = 0;
+				hit = false;
+				OverHead = "";
+			}
+		}
+		if (reset) {
+			delay --;
+			if (delay == 0){
+				level.screen.setScreen(new TitleScreen());
+			}
+		}
+	}
+
+	public void hit(int hitpower) {
+
+		hp += hitpower;
+		hit = true;
+		if (hitpower < 0) {
+			negative = true;
+		} else {
+			negative = false;
+		}
+		System.out.println(hp);
+
+		OverHead = Integer.toString(hitpower);
+		if (hp <= 0) {
+			msg = new String[] { "YOU DIED!" };
+			level.popup(this);
+			reset = true;
 		}
 	}
 

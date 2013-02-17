@@ -93,6 +93,14 @@ public class GameScreen extends Screen {
 			g.drawImage(Draw.playerAttacking[xpos][ypos], (x - camera.x),
 					(y - camera.y), null);
 		}
+		if (type == 3){
+			g.drawImage(Draw.zombie[xpos][ypos], (x - camera.x),
+					(y - camera.y), null);
+		}
+		if (type == 4){
+			g.drawImage(Draw.zombieAttacking[xpos][ypos], (x - camera.x),
+					(y - camera.y), null);
+		}
 
 	}
 

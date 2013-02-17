@@ -26,6 +26,8 @@ public class Entity {
 	public int hitpower = -1;
 	public String OverHead = "";
 	public boolean hit,negative;
+	public boolean checkattack = false;
+
 	
 
 	public boolean interactsWithWorld = false;

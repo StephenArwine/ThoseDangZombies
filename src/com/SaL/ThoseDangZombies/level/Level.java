@@ -163,6 +163,7 @@ public class Level {
 					add(new TestNPC(x, y));
 				}
 
+
 				if (tiles[x + y * width] == 0xFF808072) {
 					IndoorTiles.Axe.Register(x, y);
 					add(new StaticEntity(x, y, 5, 5, 0, -1));
@@ -171,6 +172,11 @@ public class Level {
 				
 				
 				// outside tiles
+				
+				if (tiles[x + y * width] == 0xFF0001FF) {
+					TownTiles.Grass.Register(x, y);
+					add(new Zombie(x, y));
+				}
 				
 				if (tiles[x + y * width] == 0xFFECECEC)
 					TownTiles.Grass.Register(x, y);
