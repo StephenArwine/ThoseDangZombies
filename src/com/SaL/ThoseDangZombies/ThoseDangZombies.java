@@ -15,9 +15,9 @@ import com.SaL.ThoseDangZombies.screen.*;
 public class ThoseDangZombies extends Canvas implements Runnable, KeyListener {
 
 	private static final long serialVersionUID = 1L;
-	public static final int WIDTH = 300;
-	public static final int HEIGHT = 168;
-	public static int scale = 3;
+	public static final int WIDTH = 320;
+	public static final int HEIGHT = 240;
+	public static int scale = 2;
 	public static String title = "ThoseDangZombies";
 	private JFrame frame;
 	public static int anim = 0;

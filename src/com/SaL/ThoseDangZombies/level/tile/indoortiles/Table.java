@@ -2,17 +2,16 @@ package com.SaL.ThoseDangZombies.level.tile.indoortiles;
 
 import java.awt.Graphics;
 
-import com.SaL.ThoseDangZombies.level.Level;
 import com.SaL.ThoseDangZombies.screen.GameScreen;
 
 public class Table extends IndoorTiles {
 	public void Register(int x, int y) {
 	loc[x][y] = IndoorTiles.Table;
-	Level.world[x][y] = loc[x][y];
-	Level.world[x+1][y] = null;
-	Level.Solid[x][y] = true;
-	Level.Solid[x+1][y] = true;
-	Level.OverTiles[x][y] = true;
+	world[x][y] = loc[x][y];
+	world[x+1][y] = null;
+	//Level.Solid[x][y] = true;
+	//Level.Solid[x+1][y] = true;
+	OverTiles[x][y] = true;
 
 	}
 	

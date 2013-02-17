@@ -2,15 +2,14 @@ package com.SaL.ThoseDangZombies.level.tile.indoortiles;
 
 import java.awt.Graphics;
 
-import com.SaL.ThoseDangZombies.level.Level;
 import com.SaL.ThoseDangZombies.screen.GameScreen;
 
 public class ChairWest extends IndoorTiles {
 	public void Register(int x, int y) {
 	loc[x][y] = IndoorTiles.ChairWest;
-	Level.world[x][y] = loc[x][y];
-	Level.Solid[x][y] = true;
-	Level.OverTiles[x][y] = true;
+	world[x][y] = loc[x][y];
+//	Level.Solid[x][y] = true;
+	OverTiles[x][y] = true;
 
 	}
 	

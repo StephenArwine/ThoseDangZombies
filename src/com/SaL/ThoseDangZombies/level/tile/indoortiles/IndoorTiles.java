@@ -19,7 +19,17 @@ public class IndoorTiles extends Tile {
 	public static Tile Table = new Table();
 	public static Tile ChairWest = new ChairWest();
 	public static Tile Axe = new Axe();
+	public static Tile Door = new Door();
+	public static Tile Blood = new Blood();
+	public static Tile StairDown = new StairDown();
+	public static Tile StairUp = new StairUp();
+	public static Tile Rug = new Rug();
+	public static Tile BookShelf = new BookShelf();
+	public static Tile Barrel = new Barrel();
 
+
+
+	
 	
 	
 public void Register(int x, int y){

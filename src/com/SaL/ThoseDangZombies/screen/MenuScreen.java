@@ -8,7 +8,7 @@ public class MenuScreen extends Screen {
 	private GameScreen parent;
 	private int selected = 0;
 
-	private String[] options = { "BACK TO GAME", "QUIT TO TITLE" };
+	private String[] options = { "BACK TO GAME ", "QUIT TO TITLE" };
 
 	public MenuScreen(GameScreen parent) {
 		this.parent = parent;
@@ -24,7 +24,7 @@ public class MenuScreen extends Screen {
 				xs = s;
 		}
 		xs += 1;
-		int xp = 40;
+		int xp = 80;
 		int yp = 40;
 		for (int x = 0 - 1; x < xs + 1; x++) {
 			for (int y = 0 - 1; y < ys + 1; y++) {
@@ -38,12 +38,13 @@ public class MenuScreen extends Screen {
 					xf++;
 				if (y >= ys)
 					yf++;
-				g.drawImage(Draw.string[xf][yf], xp + x * 6, yp + y * 6, null);
+				g.drawImage(Draw.string[xf][yf], (xp - (xs * 3)) + x * 6, yp
+						+ y * 6, null);
 			}
 		}
 		for (int y = 0; y < options.length; y++) {
 			if (y == selected) {
-				WordsYo("+", g, xp, yp + y * 6);
+				WordsYo("+", g, xp - (xs * 3) + 3, yp + y * 6);
 			}
 			WordsYo(options[y], g, xp + 6, yp + y * 6);
 		}
@@ -64,16 +65,11 @@ public class MenuScreen extends Screen {
 			if (selected >= options.length)
 				selected -= options.length;
 		}
-		if (input.buttons[Input.SHOOT] && !input.oldButtons[Input.SHOOT]) {
+		if (input.buttons[Input.ACTION] && !input.oldButtons[Input.ACTION]) {
 			if (selected == 0) {
 				setScreen(parent);
 			} else if (selected == 1) {
-				// parent.level.player.die();
-				// setScreen(parent);
-			} else if (selected == 2) {
-				 setScreen(new TitleScreen());
-			} else if (selected == 3) {
-
+				setScreen(new TitleScreen());
 			}
 		}
 	}

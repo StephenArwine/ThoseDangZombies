@@ -4,7 +4,6 @@ package com.SaL.ThoseDangZombies.graphics;
 public class Sprite {
 	
 	public final int SIZEY,SIZEX;
-	private int x, y;
 	public int[] pixels;
 
 	public static Sprite VoidSprite = new Sprite(16, 0x000000);

@@ -3,7 +3,6 @@ package com.SaL.ThoseDangZombies.level.tile.indoortiles;
 import java.awt.Graphics;
 
 import com.SaL.ThoseDangZombies.ThoseDangZombies;
-import com.SaL.ThoseDangZombies.level.Level;
 import com.SaL.ThoseDangZombies.level.tile.Tile;
 import com.SaL.ThoseDangZombies.screen.GameScreen;
 
@@ -11,7 +10,7 @@ public class TorchN extends Tile {
 
 	public void Register(int x, int y) {
 		loc[x][y] = IndoorTiles.TorchN;
-		Level.world[x][y] = loc[x][y];
+		world[x][y] = loc[x][y];
 	}
 
 	public void render(int x, int y, Graphics g) {
