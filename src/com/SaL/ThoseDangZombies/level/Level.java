@@ -137,9 +137,8 @@ public class Level {
 					IndoorTiles.TorchN.Register(x, y);
 				
 				if (tiles[x + y * width] == 0xFFFF0000) {
-					add(new StaticEntity(x, y, 5, 8, 6, 7));
+					add(new Bed(x, y));
 					add(new StaticEntity(x, y - 1, 5, 8, 6, 8));
-					IndoorTiles.Bed.Register(x, y);
 				}
 				if (tiles[x + y * width] == 0xFF73410F) {
 					IndoorTiles.ChairSouth.Register(x, y);
